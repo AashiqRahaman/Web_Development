@@ -1,3 +1,20 @@
 em {
     background-color: aquamarine;
 }
+.form 
+{
+    border: 2px solid rgb(48, 49, 47);
+    margin: auto;
+    padding: 15px;
+    background-color: rgb(122, 176, 247);
+    border-radius: 20px;
+    width: 70%;
+    
+}
+div {
+    margin: 10px;
+    
+}
+body{
+    background-color: rgb(96, 138, 167);
+}
