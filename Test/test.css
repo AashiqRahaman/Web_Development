@@ -17,3 +17,8 @@ body{
 h1{
     font-family: "Press Start 2P", system-ui ;
 }
+p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-weight: bolder;
+}
