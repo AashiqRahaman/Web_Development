@@ -11,11 +11,14 @@
 
 <body class="loginbody">
     <div>
-        <h1>Login</h1>
+        <h1>Registration</h1>
     </div>
     <div class="login_div">
         <form class="lform" action="../index.html">
-
+            <div><label for="fullname">Full Name: </label>
+            </div>
+            <div><input type="text" id="fullname" name="fullname" placeholder="Abc Pqr Xyz"><i
+                    class='bx bxs-spreadsheet'></i></div>
 
             <div><label for="uname">Username: </label> </div>
             <div><input type="text" id="uname" placeholder="apx12">
@@ -23,27 +26,28 @@
             </div>
 
             <div><label for="email">Email Id:</label></div>
-            <div> <input type="text" id="email" placeholder="abc@email.com">
+               <div> <input type="text" id="email" placeholder="abc@email.com">
                 <i class='bx bxl-gmail'></i>
             </div>
 
             <div><label for="password">Password:</label></div>
-            <div> <input type="password" id="password" placeholder="Abc123">
+               <div> <input type="password" id="password" placeholder="Abc123">
                 <i class='bx bxs-lock'></i>
             </div>
 
             <div class="remember_div">
                 <input type="checkbox" id="remember">
                 <label for="remember">Remember Me</label>
-            </div>
-            <div><a href="#">Forget Password?</a></div>
-            <div class="submit"><button>submit</button>
-                <!-- <input type="submit" value="Login"> -->
-            </div>
-
+             
             <!-- <a href="#">Forgot Password?</a> -->
             <!-- <a href="#">Create New Account</a> -->
-            <p>Don't Have an Account? <a href="signin.html">Register</a></p>
+            
+
+            <div class="submit">
+                <button>Submit</button>
+                <!-- <input type="submit" value="Submit"> -->
+            </div>
+            <p>Already have an account? <a href="Login.html">Login</a></p>
 
         </form>
     </div>

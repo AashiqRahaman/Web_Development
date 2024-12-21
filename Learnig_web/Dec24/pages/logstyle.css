@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+h1{
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: italic;
+
+    position: absolute;
+    font-size: 10vw;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: auto ;
+    color: rgb(252, 115, 4);
+    
+}
+
+.loginbody {
+    background-color: rgb(241, 82, 82);
+    
+    align-items: center;
+    position: relative;
+    background: url('../../Img_ForWeb/CAT/c9.jpg') no-repeat;
+    /* all in in eattribute */
+    background-size: cover;
+    background-position: center;
+}
+
+.login_div {
+    border: 5px solid rgb(116, 117, 117);
+    /* background-color: rgb(140, 212, 176); */
+    border-radius: 10px;
+    padding:10px;
+    margin: auto;
+    /* background-color: transparent; */
+    /* opacity: 0.4; */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    /* backdrop-filter: blur(20px); */
+    
+}
+
+.lform {
+    /* z-index: 10; */
+    background-color: rgba(161, 199, 243, 0.5);
+    
+    /* for any color opacity */
+    /* border-radius: 10px; */
+    /* for blur effect */
+    margin: 5px;
+    padding: 20px ;
+    display: flex;
+    flex-direction: column;
+    /* opacity: 1; */
+    /* position: relative; */
+
+}
+input{
+    background-color: rgb(175, 233, 233);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    /* z-index: 10;
+    opacity: 0.9;
+    position: relative; */
+}
+.submit{
+    /* position: absolute; */
+    z-index:  1;
+    opacity: 0.9;
+    align-content: center;
+    color: blue;
+}
+div.submit{
+    background-color: rgb(154, 135, 236,0.4);
+    border: none;
+    padding: 1.5em;
+    border-radius: 5px;
+    position: relative;
+}
+button{
+    background-color: rgb(5, 247, 57);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    
+}
