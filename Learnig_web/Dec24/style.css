@@ -6,4 +6,11 @@
 body,html{
     width: 100%;
     height: 100%;
+
+}
+body {
+    background-image: url(../Img_ForWeb/CAT/c7.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

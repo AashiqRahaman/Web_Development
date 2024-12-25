@@ -42,8 +42,8 @@ h1{
 
 .login_div {
     border: 5px solid rgb(116, 117, 117);
-    /* background-color: rgb(140, 212, 176); */
-    border-radius: 10px;
+    background-color: rgba(197, 248, 223, 0.4);
+    border-radius: 20px;
     padding:10px;
     margin: auto;
     /* background-color: transparent; */
@@ -61,7 +61,7 @@ h1{
     background-color: rgba(161, 199, 243, 0.5);
     
     /* for any color opacity */
-    /* border-radius: 10px; */
+    border-radius: 15px;
     /* for blur effect */
     margin: 5px;
     padding: 20px ;
