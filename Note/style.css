@@ -1,0 +1,130 @@
+:root {
+    --primary-color: #1abc9c;
+    --secondary-color: #2c3e50;
+    --accent-color: #ecf0f1;
+    --note-bg: #fffbea;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--accent-color);
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+#addBtn {
+    padding: 0.8rem 1.2rem;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#addBtn:hover {
+    background: #34495e;
+      transform: scale(1.1);
+
+}
+
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1rem;
+
+}
+
+body {
+    background: linear-gradient(-45deg, #ebb19f, #c795f0, #a1e798, #202524);
+    animation: gradient 10s ease infinite;
+}
+
+.note {
+    background: var(--note-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.note:hover {
+    transform: scale(1.02);
+}
+
+.note-header {
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.note-header i {
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.note-title,
+.note-content {
+    width: 100%;
+    border: none;
+    resize: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background: transparent;
+}
+
+.note-title {
+    font-weight: bold;
+    background: #dff9fb;
+}
+
+.note-content {
+    height: 150px;
+    background: #fef9e7;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
