@@ -4,18 +4,28 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern Ar_Note</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="Resources/Ar_Note.png">
+    <title>Ar_Note</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
-        <h1>📝 Ar_Note App</h1>
+        <nav>
+            <a href="#home" class="nav">Home</a>
+            <a href="readme.md" class="nav">About</a>
+            <a href="#contact" class="nav">Contact</a>
+            <a href="#bookmarks" class="nav">Bookmarks</a>
+            <a href="#login" class="nav">Login</a>
+        </nav>
+        <h1><i>📝 Ar_Note App</i></h1>
     </header>
     <div class="btn-container">
-        <button id="addBtn"><i class="fas fa-plus"></i> Add Note</button>
+        <button id="addBtn">
+            <i class="note_plus"><img src="Resources/plus-circle.png" alt="+">Add Note</i>
+            
+        </button>
+        <img src="" alt="">
     </div>
     <div id="main"></div>
     <script src="script.js"></script>

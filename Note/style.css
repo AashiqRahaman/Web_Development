@@ -17,18 +17,43 @@ body {
     min-height: 100vh;
 }
 
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    color: rgb(245, 242, 242);
+
+}
+
+.nav {
+    --glow-color: rgb(199, 203, 238);
+    text-decoration: none;
+    color: rgb(12, 34, 235);
+    padding: 5px;
+    border-radius: 30%;
+    border: 0.25em solid var(--glow-color);
+}
+
+.nav:hover {}
+
+
 header {
     background-color: var(--primary-color);
     color: white;
     text-align: center;
     padding: 1.5rem 1rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(-45deg, #1247aa, #6c7707, #0a138f, #1d5a04);
+          background-size: 110% 120%; 
+    animation: gradient 10s ease infinite;
 }
 
 .btn-container {
     display: flex;
     justify-content: center;
     margin: 1rem;
+    
 }
 
 #addBtn {
@@ -43,7 +68,7 @@ header {
 
 #addBtn:hover {
     background: #34495e;
-      transform: scale(1.1);
+    transform: scale(1.1);
 
 }
 
@@ -57,7 +82,8 @@ header {
 }
 
 body {
-    background: linear-gradient(-45deg, #ebb19f, #c795f0, #a1e798, #202524);
+    background: linear-gradient(45deg, #ebb19f, #c795f0, #7ac471, #058067);
+      background-size: 200% 200%; 
     animation: gradient 10s ease infinite;
 }
 
@@ -74,11 +100,12 @@ body {
 
 .note:hover {
     transform: scale(1.02);
+    box-shadow: 10px 10px 10px rgb(20, 1, 18);
 }
 
 .note-header {
     background: var(--primary-color);
-    color: white;
+    color: rgb(3, 38, 240);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -114,8 +141,6 @@ textarea:focus {
     outline: none;
 }
 
-
-
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
@@ -128,3 +153,4 @@ textarea:focus {
     100% {
         background-position: 0% 50%;
     }
+}
