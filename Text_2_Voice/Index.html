@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text to Speech Converter</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="app-box">
+            <h1>🗣️ Text to Speech Converter</h1>
+            <p>Type your text and choose a voice to hear it aloud</p>
+
+            <textarea id="textToConvert" placeholder="Enter your text here..." rows="8"></textarea>
+
+            <select id="voiceSelect"></select>
+            <p class="error-msg" id="errorMsg"></p>
+
+            <div class="button-group">
+                <button id="playBtn">▶️ Play</button>
+                <button id="pauseBtn">⏸️ Pause</button>
+                <button id="resumeBtn">▶️ Resume</button>
+                <button id="stopBtn">⏹️ Stop</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

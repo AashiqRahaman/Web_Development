@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+textarea:focus {
+    outline: 2px solid #f57c00;
+}
+
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    background: linear-gradient(to right, #f12711, #f5af19);
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background-color: #1e1e2f;
+    color: white;
+    border: none;
+    margin-bottom: 1rem;
+    appearance: none; /* for removing OS default style */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 1rem;
+}
+
+select option {
+    background-color: #1e1e2f;
+    color: white;
+}

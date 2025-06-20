@@ -1,0 +1,154 @@
+/* Styles for the Modal/Popup */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top (higher than other content) */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally for display: flex */
+    align-items: center; /* Center vertically for display: flex */
+    padding: 20px; /* Padding around the content if it's smaller */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* For browsers that don't support flex centering well */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%; /* Adjust width as needed */
+    max-width: 600px; /* Max width for larger screens */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative; /* Needed for close button positioning */
+    box-sizing: border-box; /* Include padding in width */
+    transform: translateY(-50px); /* Initial state for animation */
+    opacity: 0; /* Initial state for animation */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Animation for when the modal appears */
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close-button {
+    color: #aaa;
+    float: right; /* Position to the right */
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* Absolute positioning relative to modal-content */
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Form Styles (reused from previous example, but ensure they are global or scoped) */
+.modal-content h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0; /* Remove default h2 top margin */
+    margin-bottom: 15px;
+}
+.modal-content p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95em;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.contact-form button[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.contact-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.modal-contact-info {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.modal-contact-info h3 {
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.modal-contact-info p {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.modal-contact-info a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.modal-contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .close-button {
+        font-size: 24px;
+        top: 8px;
+        right: 12px;
+    }
+}
