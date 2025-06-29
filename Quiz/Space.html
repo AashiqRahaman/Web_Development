@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Quiz</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background for space theme */
+            color: #e2e8f0; /* Light text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: auto; /* Allow scrolling if content is too tall */
+        }
+        .container {
+            background-color: #2d3748; /* Slightly lighter dark background for the quiz box */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5); /* Deep shadow */
+            border-radius: 1rem; /* Rounded corners */
+            padding: 2.5rem; /* Increased padding */
+            max-width: 90%; /* Responsive max width */
+            width: 600px; /* Fixed width for larger screens */
+            text-align: center;
+            animation: fadeIn 1s ease-out; /* Fade in animation */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Space between sections */
+            position: relative; /* For dynamic messages */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem; /* Larger heading */
+            font-weight: 700;
+            color: #a0aec0; /* Lighter shade for title */
+            margin-bottom: 1rem;
+            text-shadow: 0 0 8px rgba(160, 174, 192, 0.5); /* Subtle glow */
+        }
+
+        #question-display {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: #cbd5e0;
+            min-height: 80px; /* Ensure consistent height for questions */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a202c;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .answer-button {
+            background-color: #4a5568; /* Darker button background */
+            color: #e2e8f0;
+            padding: 1rem 1.5rem; /* Increased padding */
+            margin: 0.5rem 0; /* Space between buttons */
+            border: none;
+            border-radius: 0.75rem; /* Rounded corners for buttons */
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+            width: 100%; /* Full width */
+            text-align: left; /* Align text to left */
+        }
+
+        .answer-button:hover {
+            background-color: #636b77; /* Lighter on hover */
+            transform: translateY(-2px); /* Lift effect */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .answer-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .answer-button.correct {
+            background-color: #48bb78; /* Green for correct */
+            color: #1a202c;
+            box-shadow: 0 0 10px #48bb78; /* Glow for correct */
+        }
+
+        .answer-button.incorrect {
+            background-color: #ef4444; /* Red for incorrect */
+            color: #1a202c;
+            box-shadow: 0 0 10px #ef4444; /* Glow for incorrect */
+        }
+
+        #next-button, #restart-button, #explain-answer-button {
+            background-color: #667eea; /* Blue for action buttons */
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #next-button:hover, #restart-button:hover, #explain-answer-button:hover {
+            background-color: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        #next-button:disabled, #explain-answer-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #score-display {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #9f7aea; /* Purple for score */
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #1a202c;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #results-screen {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #9f7aea;
+            margin-top: 2rem;
+        }
+
+        .feedback-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            z-index: 10;
+            animation: popUp 0.5s ease-out forwards;
+            opacity: 0;
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        .feedback-message.correct {
+            background-color: #48bb78;
+        }
+
+        .feedback-message.incorrect {
+            background-color: #ef4444;
+        }
+
+        @keyframes popUp {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                width: 95%; /* Even wider on small screens */
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            #question-display {
+                font-size: 1.2rem;
+                min-height: 60px;
+            }
+            .answer-button {
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+            }
+            #next-button, #restart-button, #explain-answer-button {
+                font-size: 1.1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            #score-display {
+                font-size: 1rem;
+            }
+            .feedback-message {
+                font-size: 1.2rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-300">Space Quiz!</h1>
+
+        <div id="score-display">
+            <span>Question <span id="current-q-num">1</span> of <span id="total-q-num"></span></span>
+            <span>Score: <span id="score">0</span></span>
+        </div>
+
+        <div id="quiz-area">
+            <div id="question-display" class="font-medium"></div>
+            <div id="answer-buttons" class="grid grid-cols-1 gap-3 mt-4">
+                <!-- Answer buttons will be dynamically added here -->
+            </div>
+            <button id="explain-answer-button" class="px-6 py-3 mt-4 rounded-xl shadow-lg transition-all duration-300 ease-in-out bg-purple-600 hover:scale-105 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 hidden">✨ Explain Answer ✨</button>
+            <div id="explanation-loading" class="mt-4 p-4 text-center text-gray-400 hidden">Generating explanation...</div>
+            <div id="explanation-display" class="mt-4 p-4 bg-gray-700 rounded-lg text-left text-sm hidden"></div>
+            <button id="next-button" class="px-6 py-3 mt-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75" disabled>Next</button>
+        </div>
+
+        <div id="results-screen" class="hidden">
+            <p>Quiz Completed!</p>
+            <p>Your final score is <span id="final-score">0</span> out of <span id="max-score"></span>.</p>
+            <button id="restart-button" class="px-6 py-3 mt-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Array of quiz questions
+        const questions = [
+            {
+                question: "What is the largest planet in our solar system?",
+                options: ["Mars", "Jupiter", "Saturn", "Earth"],
+                correctAnswer: "Jupiter"
+            },
+            {
+                question: "Which galaxy is our solar system a part of?",
+                options: ["Andromeda", "Triangulum", "Milky Way", "Whirlpool"],
+                correctAnswer: "Milky Way"
+            },
+            {
+                question: "What is the name of the first human to walk on the Moon?",
+                options: ["Buzz Aldrin", "Yuri Gagarin", "Neil Armstrong", "Michael Collins"],
+                correctAnswer: "Neil Armstrong"
+            },
+            {
+                question: "What is a 'light-year' a measure of?",
+                options: ["Time", "Distance", "Speed", "Brightness"],
+                correctAnswer: "Distance"
+            },
+            {
+                question: "Which celestial body is known as Earth's 'sister planet' due to its similar size and composition?",
+                options: ["Mars", "Venus", "Mercury", "Uranus"],
+                correctAnswer: "Venus"
+            },
+            {
+                question: "What phenomenon creates a 'shooting star'?",
+                options: ["A star falling", "A comet burning up", "A meteoroid burning up in Earth's atmosphere", "A satellite re-entering"],
+                correctAnswer: "A meteoroid burning up in Earth's atmosphere"
+            },
+            {
+                question: "Which dwarf planet was formerly considered the ninth planet?",
+                options: ["Eris", "Ceres", "Pluto", "Haumea"],
+                correctAnswer: "Pluto"
+            },
+            {
+                question: "What is the name of the supermassive black hole at the center of the Milky Way galaxy?",
+                options: ["Cygnus X-1", "Sagittarius A*", "V404 Cygni", "Messier 87"],
+                correctAnswer: "Sagittarius A*"
+            },
+            {
+                question: "Which of these is NOT a gas giant?",
+                options: ["Jupiter", "Saturn", "Neptune", "Earth"],
+                correctAnswer: "Earth"
+            },
+            {
+                question: "What is the study of the origin and evolution of the universe called?",
+                options: ["Astrology", "Geology", "Cosmology", "Biology"],
+                correctAnswer: "Cosmology"
+            }
+        ];
+
+        // Get DOM elements
+        const questionDisplay = document.getElementById('question-display');
+        const answerButtonsContainer = document.getElementById('answer-buttons');
+        const nextButton = document.getElementById('next-button');
+        const restartButton = document.getElementById('restart-button');
+        const quizArea = document.getElementById('quiz-area');
+        const resultsScreen = document.getElementById('results-screen');
+        const scoreDisplay = document.getElementById('score');
+        const finalScoreDisplay = document.getElementById('final-score');
+        const maxScoreDisplay = document.getElementById('max-score');
+        const currentQNumDisplay = document.getElementById('current-q-num');
+        const totalQNumDisplay = document.getElementById('total-q-num');
+        const explainAnswerButton = document.getElementById('explain-answer-button'); // New button
+        const explanationDisplay = document.getElementById('explanation-display');     // New explanation area
+        const explanationLoading = document.getElementById('explanation-loading');     // New loading indicator
+
+        // Quiz state variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answerSelected = false; // To prevent multiple selections per question
+
+        // Function to load a question
+        function loadQuestion() {
+            // Remove any existing feedback messages
+            const existingFeedback = document.querySelector('.feedback-message');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            // Hide explanation elements
+            explainAnswerButton.classList.add('hidden');
+            explainAnswerButton.disabled = true;
+            explanationDisplay.classList.add('hidden');
+            explanationDisplay.textContent = ''; // Clear previous explanation
+            explanationLoading.classList.add('hidden');
+
+            answerSelected = false; // Reset selection flag for new question
+            nextButton.disabled = true; // Disable next button until an answer is selected
+            answerButtonsContainer.innerHTML = ''; // Clear previous answer buttons
+
+            if (currentQuestionIndex < questions.length) {
+                const currentQuestion = questions[currentQuestionIndex];
+                questionDisplay.textContent = currentQuestion.question;
+
+                currentQuestion.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('answer-button');
+                    button.onclick = () => checkAnswer(option, currentQuestion.correctAnswer, button);
+                    answerButtonsContainer.appendChild(button);
+                });
+
+                // Update question number display
+                currentQNumDisplay.textContent = currentQuestionIndex + 1;
+                totalQNumDisplay.textContent = questions.length;
+                scoreDisplay.textContent = score; // Update score display in header
+            } else {
+                showResults();
+            }
+        }
+
+        // Function to check the selected answer
+        function checkAnswer(selectedOption, correctAnswer, clickedButton) {
+            if (answerSelected) {
+                return; // Prevent multiple selections
+            }
+            answerSelected = true;
+
+            const allButtons = answerButtonsContainer.querySelectorAll('.answer-button');
+            allButtons.forEach(button => {
+                button.disabled = true; // Disable all buttons after selection
+                if (button.textContent === correctAnswer) {
+                    button.classList.add('correct'); // Highlight correct answer
+                }
+            });
+
+            const feedbackMessage = document.createElement('div');
+            feedbackMessage.classList.add('feedback-message');
+            document.querySelector('.container').appendChild(feedbackMessage);
+
+
+            if (selectedOption === correctAnswer) {
+                score++;
+                scoreDisplay.textContent = score;
+                clickedButton.classList.add('correct');
+                feedbackMessage.textContent = "Correct!";
+                feedbackMessage.classList.add('correct');
+            } else {
+                clickedButton.classList.add('incorrect');
+                feedbackMessage.textContent = "Incorrect!";
+                feedbackMessage.classList.add('incorrect');
+            }
+
+            nextButton.disabled = false; // Enable next button
+            explainAnswerButton.classList.remove('hidden'); // Show explain button
+            explainAnswerButton.disabled = false; // Enable explain button
+        }
+
+        // Function to explain the answer using Gemini API
+        async function explainAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            const prompt = `Provide a short, interesting explanation (2-3 sentences) for the correct answer to the following question: '${currentQuestion.question}'. The correct answer is '${currentQuestion.correctAnswer}'.`;
+
+            explanationLoading.classList.remove('hidden'); // Show loading indicator
+            explanationDisplay.classList.add('hidden');    // Hide explanation display
+            explanationDisplay.textContent = '';           // Clear previous explanation
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                // The API key is provided automatically by the Canvas environment when left as an empty string.
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (response.ok) { // Check if the HTTP response status is OK (200-299)
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        explanationDisplay.textContent = text;
+                        explanationDisplay.classList.remove('hidden');
+                    } else {
+                        // If API call was successful but the response structure is unexpected
+                        explanationDisplay.textContent = "Could not get a valid explanation from the API. Response structure unexpected.";
+                        explanationDisplay.classList.remove('hidden');
+                        console.warn("API response structure unexpected:", result);
+                    }
+                } else {
+                    // Handle HTTP errors (e.g., 400, 401, 500)
+                    const errorData = result.error ? result.error.message : JSON.stringify(result);
+                    explanationDisplay.textContent = `API Error: ${errorData}. Please try again later.`;
+                    explanationDisplay.classList.remove('hidden');
+                    console.error("API call failed with status:", response.status, result);
+                }
+            } catch (error) {
+                // Handle network errors or issues before receiving a response
+                console.error("Error generating explanation:", error);
+                explanationDisplay.textContent = `Error connecting to API: ${error.message || 'Unknown network error.'} Please check your connection and try again.`;
+                explanationDisplay.classList.remove('hidden');
+            } finally {
+                explanationLoading.classList.add('hidden'); // Hide loading indicator
+            }
+        }
+
+
+        // Function to advance to the next question
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        // Function to show final results
+        function showResults() {
+            quizArea.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+            finalScoreDisplay.textContent = score;
+            maxScoreDisplay.textContent = questions.length;
+        }
+
+        // Function to restart the quiz
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizArea.classList.remove('hidden');
+            resultsScreen.classList.add('hidden');
+            loadQuestion();
+        }
+
+        // Event listeners
+        nextButton.addEventListener('click', nextQuestion);
+        restartButton.addEventListener('click', restartQuiz);
+        explainAnswerButton.addEventListener('click', explainAnswer); // Event listener for the new button
+
+        // Initial load of the first question
+        document.addEventListener('DOMContentLoaded', loadQuestion);
+    </script>
+</body>
+</html>
