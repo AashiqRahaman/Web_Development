@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Me - Aashiq Rahaman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f2f2f2;
+      color: #333;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info,
+    .contact-form {
+      flex: 1 1 300px;
+    }
+
+    .contact-info h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .contact-details p {
+      margin: 0.8rem 0;
+      font-size: 1rem;
+    }
+
+    .contact-details a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      font-size: 1.4rem;
+      margin-right: 1rem;
+      color: #333;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #0077cc;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input,
+    textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 0.8rem;
+      background: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    #formMsg {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .contact-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="contact-container">
+    <section class="contact-info">
+      <h1>Contact Me</h1>
+      <p>Feel free to reach out via email, phone, or social media.</p>
+
+      <div class="contact-details">
+        <p><i class="fas fa-envelope"></i> aashiqrahaman0@gmail.com</p>
+        <p><i class="fas fa-phone-alt"></i> <a href="tel:+919000000000">+91 90000 00000</a></p>
+      </div>
+
+      <div class="social-links">
+        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </section>
+
+    <section class="contact-form">
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="formMsg"></p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const message = this.message.value.trim();
+
+      if (!name || !email || !message) {
+        document.getElementById("formMsg").textContent = "Please fill in all fields.";
+        return;
+      }
+
+      // Example: Replace with Formspree, EmailJS, or your backend
+      fetch("https://formspree.io/f/yourFormID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message })
+      })
+        .then(() => {
+          document.getElementById("formMsg").textContent = "Message sent successfully!";
+          document.getElementById("contactForm").reset();
+        })
+        .catch(() => {
+          document.getElementById("formMsg").textContent = "Something went wrong. Please try again.";
+        });
+    });
+  </script>
+</body>
+</html>
