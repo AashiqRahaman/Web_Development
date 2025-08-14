@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-start: #1a202c;
+            --bg-end: #2d3748;
+            --calc-bg: #2d3748;
+            --text-color: #e2e8f0;
+            --button-bg: #4a5568;
+            --button-text: #e2e8f0;
+            --operator-bg: #667eea;
+            --operator-hover: #5a67d8;
+            --equals-bg: #48bb78;
+            --equals-hover: #38a169;
+            --clear-bg: #ef4444;
+            --clear-hover: #dc2626;
+            --display-bg: #1a202c;
+            --border-color: #a0aec0;
+            --toggle-bg: #4a5568;
+            --toggle-handle: #e2e8f0;
+            --explain-btn-bg: #9f7aea; /* Purple for explanation button */
+            --explain-btn-hover: #805ad5;
+        }
+
+        /* Bright mode colors */
+        html.bright-mode {
+            --bg-start: #f7fafc;
+            --bg-end: #edf2f7;
+            --calc-bg: #ffffff;
+            --text-color: #2d3748;
+            --button-bg: #e2e8f0;
+            --button-text: #2d3748;
+            --operator-bg: #4c51bf;
+            --operator-hover: #3e44a9;
+            --equals-bg: #38a169;
+            --equals-hover: #2f855a;
+            --clear-bg: #e53e3e;
+            --clear-hover: #c53030;
+            --display-bg: #edf2f7;
+            --border-color: #4a5568;
+            --toggle-bg: #cbd5e0;
+            --toggle-handle: #2d3748;
+            --explain-btn-bg: #6b46c1; /* Darker purple for bright mode */
+            --explain-btn-hover: #553c9a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for mode toggle */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .calculator-container {
+            background-color: var(--calc-bg);
+            border: 2px solid var(--border-color); /* Initial border */
+            border-radius: 1.5rem; /* More rounded */
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Deeper shadow */
+            max-width: 95%; /* Responsive width */
+            width: 360px; /* Fixed width for larger screens */
+            transition: all 0.3s ease; /* Smooth transition for hover and mode change */
+            display: flex; /* Flexbox for vertical layout */
+            flex-direction: column;
+            gap: 1rem; /* Space between sections */
+        }
+
+        .calculator-container:hover {
+            border-color: #81e6d9; /* Teal glow on hover */
+            box-shadow: 0 10px 30px rgba(129, 230, 217, 0.8); /* Stronger glow shadow */
+        }
+
+        .display {
+            background-color: var(--display-bg);
+            color: var(--text-color);
+            padding: 1.5rem 1rem;
+            border-radius: 0.75rem;
+            text-align: right;
+            font-size: 2.5rem; /* Larger font size */
+            margin-bottom: 0.5rem; /* Reduced margin */
+            word-wrap: break-word; /* Allow long numbers to wrap */
+            min-height: 80px; /* Ensure consistent height */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            overflow-x: auto; /* Allow horizontal scrolling for very long numbers */
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem; /* Space between buttons */
+        }
+
+        .calculator-button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 1.25rem; /* More padding */
+            border: none;
+            border-radius: 0.75rem; /* Rounded buttons */
+            font-size: 1.5rem; /* Larger font for buttons */
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        .calculator-button:hover {
+            transform: translateY(-2px); /* Lift effect */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .calculator-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Specific button styles */
+        .operator {
+            background-color: var(--operator-bg);
+            color: white;
+        }
+        .operator:hover {
+            background-color: var(--operator-hover);
+        }
+
+        .equals {
+            background-color: var(--equals-bg);
+            color: white;
+            grid-column: span 2; /* Span two columns */
+        }
+        .equals:hover {
+            background-color: var(--equals-hover);
+        }
+
+        .clear {
+            background-color: var(--clear-bg);
+            color: white;
+        }
+        .clear:hover {
+            background-color: var(--clear-hover);
+        }
+
+        .zero {
+            grid-column: span 2; /* Make zero button wider */
+        }
+
+        /* Mode Toggle styles */
+        .mode-toggle-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+
+        .mode-toggle {
+            width: 60px;
+            height: 30px;
+            background-color: var(--toggle-bg);
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .mode-toggle::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: var(--toggle-handle);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        html.bright-mode .mode-toggle::before {
+            transform: translateX(30px);
+        }
+
+        /* Explain Button and Explanation Area */
+        #explain-calculation-button {
+            background-color: var(--explain-btn-bg);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            margin-top: 1rem;
+        }
+        #explain-calculation-button:hover {
+            background-color: var(--explain-btn-hover);
+            transform: translateY(-2px);
+        }
+        #explain-calculation-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #explanation-loading {
+            text-align: center;
+            color: var(--text-color);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        #explanation-display {
+            background-color: var(--display-bg); /* Use display background for consistency */
+            color: var(--text-color);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            text-align: left;
+            min-height: 40px; /* Give it some space even when empty */
+            display: flex; /* To center text vertically */
+            align-items: center;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .calculator-container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+            .display {
+                font-size: 2rem;
+                padding: 1rem 0.75rem;
+            }
+            .calculator-button {
+                padding: 1rem;
+                font-size: 1.3rem;
+            }
+            #explain-calculation-button {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+            #explanation-display {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <!-- Mode Toggle -->
+        <div class="mode-toggle-container">
+            <div id="modeToggle" class="mode-toggle"></div>
+        </div>
+
+        <!-- Calculator Display -->
+        <div id="display" class="display">0</div>
+
+        <!-- Calculator Buttons -->
+        <div class="buttons-grid">
+            <button class="calculator-button clear" data-action="clear">AC</button>
+            <button class="calculator-button operator" data-action="negate">+/-</button>
+            <button class="calculator-button operator" data-action="percent">%</button>
+            <button class="calculator-button operator" data-action="divide">/</button>
+
+            <button class="calculator-button" data-value="7">7</button>
+            <button class="calculator-button" data-value="8">8</button>
+            <button class="calculator-button" data-value="9">9</button>
+            <button class="calculator-button operator" data-action="multiply">*</button>
+
+            <button class="calculator-button" data-value="4">4</button>
+            <button class="calculator-button" data-value="5">5</button>
+            <button class="calculator-button" data-value="6">6</button>
+            <button class="calculator-button operator" data-action="subtract">-</button>
+
+            <button class="calculator-button" data-value="1">1</button>
+            <button class="calculator-button" data-value="2">2</button>
+            <button class="calculator-button" data-value="3">3</button>
+            <button class="calculator-button operator" data-action="add">+</button>
+
+            <button class="calculator-button zero" data-value="0">0</button>
+            <button class="calculator-button" data-value=".">.</button>
+            <button class="calculator-button equals" data-action="equals">=</button>
+        </div>
+
+        <!-- New: Explain Calculation Button -->
+        <button id="explain-calculation-button" class="hidden">✨ Explain Calculation ✨</button>
+
+        <!-- New: Explanation Loading and Display Area -->
+        <div id="explanation-loading" class="hidden">Generating explanation...</div>
+        <div id="explanation-display" class="hidden"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const display = document.getElementById('display');
+            const buttons = document.querySelectorAll('.calculator-button');
+            const modeToggle = document.getElementById('modeToggle');
+            const htmlElement = document.documentElement;
+            const explainCalculationButton = document.getElementById('explain-calculation-button');
+            const explanationLoading = document.getElementById('explanation-loading');
+            const explanationDisplay = document.getElementById('explanation-display');
+
+            let currentInput = '0';
+            let firstOperand = null;
+            let operator = null;
+            let waitingForSecondOperand = false;
+            let storedSecondOperand = null; // To store the second operand for explanation purposes
+
+            // Function to update the display
+            function updateDisplay() {
+                display.textContent = currentInput;
+            }
+
+            // Function to hide LLM-related elements
+            function hideLlmElements() {
+                explainCalculationButton.classList.add('hidden');
+                explainCalculationButton.disabled = true;
+                explanationLoading.classList.add('hidden');
+                explanationDisplay.classList.add('hidden');
+                explanationDisplay.textContent = '';
+            }
+
+            // Function to handle number input
+            function inputDigit(digit) {
+                hideLlmElements(); // Hide explanation when a new number is typed
+                if (waitingForSecondOperand) {
+                    currentInput = digit;
+                    waitingForSecondOperand = false;
+                } else {
+                    currentInput = currentInput === '0' ? digit : currentInput + digit;
+                }
+                updateDisplay();
+            }
+
+            // Function to handle decimal point
+            function inputDecimal(dot) {
+                hideLlmElements(); // Hide explanation when decimal is typed
+                if (waitingForSecondOperand) {
+                    currentInput = '0.';
+                    waitingForSecondOperand = false;
+                    updateDisplay();
+                    return;
+                }
+                if (!currentInput.includes(dot)) {
+                    currentInput += dot;
+                }
+                updateDisplay();
+            }
+
+            // Function to handle clear (AC)
+            function clear() {
+                currentInput = '0';
+                firstOperand = null;
+                operator = null;
+                waitingForSecondOperand = false;
+                storedSecondOperand = null;
+                hideLlmElements(); // Hide explanation on clear
+                updateDisplay();
+            }
+
+            // Function to handle negate (+/-)
+            function negate() {
+                hideLlmElements(); // Hide explanation on negate
+                currentInput = (parseFloat(currentInput) * -1).toString();
+                updateDisplay();
+            }
+
+            // Function to handle percentage (%)
+            function percent() {
+                hideLlmElements(); // Hide explanation on percentage
+                currentInput = (parseFloat(currentInput) / 100).toString();
+                updateDisplay();
+            }
+
+            // Function to handle operators
+            function handleOperator(nextOperator) {
+                hideLlmElements(); // Hide explanation when a new operator is pressed
+                const inputValue = parseFloat(currentInput);
+
+                if (operator && waitingForSecondOperand) {
+                    operator = nextOperator;
+                    return;
+                }
+
+                if (firstOperand === null) {
+                    firstOperand = inputValue;
+                } else if (operator) {
+                    const result = operate(firstOperand, inputValue, operator);
+                    currentInput = String(result);
+                    firstOperand = result;
+                }
+
+                waitingForSecondOperand = true;
+                operator = nextOperator;
+                updateDisplay();
+            }
+
+            // Perform calculation
+            function operate(op1, op2, op) {
+                switch (op) {
+                    case '+': return op1 + op2;
+                    case '-': return op1 - op2;
+                    case '*': return op1 * op2;
+                    case '/':
+                        if (op2 === 0) {
+                            return "Error: Div by 0"; // Handle division by zero
+                        }
+                        return op1 / op2;
+                    default: return op2; // Fallback
+                }
+            }
+
+            // Function to explain the calculation using Gemini API
+            async function explainCalculation() {
+                explanationLoading.classList.remove('hidden');
+                explanationDisplay.classList.add('hidden');
+                explanationDisplay.textContent = '';
+                explainCalculationButton.disabled = true; // Disable while fetching
+
+                let prompt = '';
+                if (firstOperand !== null && storedSecondOperand !== null && operator !== null && !String(currentInput).includes("Error")) {
+                    // We have all components for a clear explanation
+                    prompt = `Explain the calculation: ${firstOperand} ${operator} ${storedSecondOperand} = ${currentInput} in 2-3 concise sentences. Focus on the mathematical concept or a brief real-world context for this type of operation/result.`;
+                } else if (!String(currentInput).includes("Error")) {
+                    // If it's a simple number or a result after multiple chained operations, explain the number itself
+                    prompt = `Provide a short, interesting fact or context about the number ${currentInput} in 2-3 concise sentences.`;
+                } else {
+                    // Handle error case, though the button should be hidden for errors
+                    explanationDisplay.textContent = "Cannot explain calculation due to an error or incomplete operation.";
+                    explanationDisplay.classList.remove('hidden');
+                    explanationLoading.classList.add('hidden');
+                    return;
+                }
+
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will provide this automatically
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            explanationDisplay.textContent = text;
+                            explanationDisplay.classList.remove('hidden');
+                        } else {
+                            explanationDisplay.textContent = "Could not get a valid explanation. Response structure unexpected.";
+                            explanationDisplay.classList.remove('hidden');
+                            console.warn("API response structure unexpected:", result);
+                        }
+                    } else {
+                        const errorData = result.error ? result.error.message : JSON.stringify(result);
+                        explanationDisplay.textContent = `API Error: ${errorData}.`;
+                        explanationDisplay.classList.remove('hidden');
+                        console.error("API call failed with status:", response.status, result);
+                    }
+                } catch (error) {
+                    console.error("Error generating explanation:", error);
+                    explanationDisplay.textContent = `Error connecting to API: ${error.message || 'Unknown network error.'} Please try again.`;
+                    explanationDisplay.classList.remove('hidden');
+                } finally {
+                    explanationLoading.classList.add('hidden');
+                    explainCalculationButton.disabled = false; // Re-enable button
+                }
+            }
+
+
+            // Add event listeners to all calculator buttons
+            buttons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const { value, action } = event.target.dataset;
+
+                    if (value) {
+                        inputDigit(value);
+                    } else if (action === 'clear') {
+                        clear();
+                    } else if (action === 'negate') {
+                        negate();
+                    } else if (action === 'percent') {
+                        percent();
+                    } else if (action === 'equals') {
+                        // Only perform calculation if we have enough operands and an operator
+                        if (firstOperand !== null && operator !== null) {
+                            storedSecondOperand = parseFloat(currentInput); // Capture second operand before calculating
+                            const result = operate(firstOperand, storedSecondOperand, operator);
+                            currentInput = String(result);
+
+                            // Only show explain button if calculation was successful
+                            if (!currentInput.includes("Error")) {
+                                explainCalculationButton.classList.remove('hidden');
+                                explainCalculationButton.disabled = false;
+                            } else {
+                                hideLlmElements(); // Hide if error
+                            }
+
+                            firstOperand = null; // Reset for next calculation
+                            operator = null;
+                            waitingForSecondOperand = false;
+                            updateDisplay();
+                        } else {
+                             // If equals pressed without a valid operation, just update display and hide LLM elements
+                            updateDisplay();
+                            hideLlmElements();
+                        }
+
+                    } else if (action) { // Operators (+, -, *, /)
+                        handleOperator(action === 'add' ? '+' : action === 'subtract' ? '-' : action === 'multiply' ? '*' : '/');
+                    }
+
+                    // Special handling for decimal point (if not already handled by inputDigit)
+                    if (value === '.') {
+                        inputDecimal('.');
+                    }
+                });
+            });
+
+            // Add event listener for the new explain button
+            explainCalculationButton.addEventListener('click', explainCalculation);
+
+            // Dark/Bright mode toggle logic
+            modeToggle.addEventListener('click', () => {
+                htmlElement.classList.toggle('bright-mode');
+                // Store preference in localStorage (optional)
+                if (htmlElement.classList.contains('bright-mode')) {
+                    localStorage.setItem('theme', 'bright');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+
+            // Apply saved theme on load
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'bright') {
+                htmlElement.classList.add('bright-mode');
+            } else {
+                htmlElement.classList.remove('bright-mode'); // Default to dark mode if no preference or 'dark'
+            }
+
+            updateDisplay(); // Initial display update
+        });
+    </script>
+</body>
+</html>

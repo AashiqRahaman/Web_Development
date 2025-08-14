@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Aashiq Rahaman | Stunning IT Portfolio</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">AashiqR</div>
+        <ul>
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#profile" class="nav-link">Profile</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="toggle-switch">
+            <input type="checkbox" id="theme-toggle">
+            <label for="theme-toggle"></label>
+        </div>
+        <div class="nav-toggle">&#9776;</div>
+    </nav>
+    <main>
+        <section id="home" class="section visible">
+            <div class="parallax-bg"></div>
+            <div class="hero-glass">
+                <h1>Hi, I'm <span class="highlight">Aashiq Rahaman</span></h1>
+                <p class="subtitle">BTech CSE Student | Web Developer passionate about building <span class="typed"></span></p>
+                <a href="#projects" class="cta-btn">See My Projects</a>
+            </div>
+        </section>
+
+        <section id="profile" class="section">
+            <div class="glass profile-glass">
+                <img src="..\asseets\Logo.png" alt="Profile" class="profile-pic" />
+                <div>
+                    <h2>About Me</h2>
+                    <p>
+                        Hi! I'm Aashiq, a CSE student and web developer, deeply interested in interactive design, full-stack apps, and scalable solutions. I enjoy pushing boundaries and solving real problems with code.
+                    </p>
+                    <h4>Top Skills</h4>
+                    <ul class="skills-list">
+                        <li>JavaScript (ES6+), React, Next.js</li>
+                        <li>Node.js, Express, MongoDB</li>
+                        <li>HTML5, CSS3 (Sass, Tailwind, Flex, Grid)</li>
+                        <li>APIs, Git, Docker</li>
+                        <li>Responsive, Accessibility-first Design</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card glass animate">
+                    <img src="https://source.unsplash.com/350x200/?website,design,code" alt="Portfolio" />
+                    <div>
+                        <h4>Deluxe Portfolio Website</h4>
+                        <p>Interactive, animated personal portal with glassmorphism and dark mode, built for modern browsers.</p>
+                        <span>HTML, CSS, JS</span>
+                    </div>
+                </div>
+                <div class="project-card glass animate">
+                    <img src="https://source.unsplash.com/350x200/?app,software" alt="Student Management App" />
+                    <div>
+                        <h4>Student Manager+ </h4>
+                        <p>Full-stack MERN CRUD app with authentication and intuitive dashboard for universities.</p>
+                        <span>React, Node, MongoDB</span>
+                    </div>
+                </div>
+                <div class="project-card glass animate">
+                    <img src="https://source.unsplash.com/350x200/?weather,webapp" alt="Weather Dashboard" />
+                    <div>
+                        <h4>Real-Time Weather Dashboard</h4>
+                        <p>Stunning SPA that fetches dynamic weather with charts & theme adaptive UI.</p>
+                        <span>JS, API, Chart.js</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Me</h2>
+            <form id="contactForm" class="glass">
+                <input type="text" placeholder="Your Name" required/>
+                <input type="email" placeholder="Your Email" required/>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+                <div id="formStatus"></div>
+            </form>
+            <div class="info-email">
+                <b>Email:</b> <a href="mailto:aashiqrahaman135@gmail.com">aashiqrahaman135@gmail.com</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Aashiq Rahaman | Designed with passion</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

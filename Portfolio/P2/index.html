@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE Student Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Aashiq Rahaman</h1>
+            <h2>CSE Student | Aspiring IT Professional</h2>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <section id="about" class="container">
+        <h3>About Me</h3>
+        <p>
+            I am a final-year CSE student with a passion for software development and system design. I thrive on building impactful IT solutions and continually learning the latest technology trends.
+        </p>
+    </section>
+    <section id="skills" class="container">
+        <h3>Technical Skills</h3>
+        <ul>
+            <li>Programming: Java, Python, JavaScript, C++</li>
+            <li>Web: HTML, CSS, React</li>
+            <li>Databases: MySQL, MongoDB</li>
+            <li>Tools: Git, Visual Studio Code, Linux</li>
+        </ul>
+    </section>
+    <section id="projects" class="container">
+        <h3>Projects</h3>
+        <div class="project">
+            <h4>Student Management System</h4>
+            <p>
+                A web app to manage student records with CRUD features.<br>
+                <b>Tech:</b> Python, Flask, SQLite
+            </p>
+        </div>
+        <div class="project">
+            <h4>Portfolio Website</h4>
+            <p>
+                This responsive portfolio to showcase my work.<br>
+                <b>Tech:</b> HTML, CSS, JavaScript
+            </p>
+        </div>
+        <div class="project">
+            <h4>Chatbot Assistant</h4>
+            <p>
+                A personal assistant chatbot using Python and NLTK.<br>
+                <b>Tech:</b> Python, NLTK
+            </p>
+        </div>
+    </section>
+    <section id="contact" class="container">
+        <h3>Contact Me</h3>
+        <form id="contactForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <div id="formMessage"></div>
+    </section>
+    <footer>
+        <div class="container">
+            &copy; 2025 Aashiq Rahaman | LinkedIn | GitHub
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

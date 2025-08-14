@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* CSS Variables for Dark Mode */
+        :root {
+            --bg-start: #1a202c; /* Dark Blue-Gray */
+            --bg-end: #2d3748;   /* Darker Blue-Gray */
+            --card-bg: #2d3748;
+            --text-color: #e2e8f0; /* Light Gray */
+            --heading-color: #a0aec0; /* Lighter Blue-Gray */
+            --border-color: #4a5568; /* Medium Gray */
+            --icon-color: #a0aec0;
+            --icon-hover-color: #667eea; /* Indigo */
+            --copy-btn-bg: #4a5568;
+            --copy-btn-hover-bg: #636b77;
+            --mode-toggle-bg: #4a5568;
+            --mode-toggle-handle: #e2e8f0;
+        }
+
+        /* CSS Variables for Bright Mode */
+        html.bright-mode {
+            --bg-start: #f7fafc; /* Lightest Gray */
+            --bg-end: #edf2f7;   /* Lighter Gray */
+            --card-bg: #ffffff;
+            --text-color: #2d3748; /* Dark Blue-Gray */
+            --heading-color: #4a5568; /* Medium Gray */
+            --border-color: #cbd5e0; /* Pale Blue-Gray */
+            --icon-color: #718096; /* Slate Gray */
+            --icon-hover-color: #4c51bf; /* Darker Indigo */
+            --copy-btn-bg: #e2e8f0;
+            --copy-btn-hover-bg: #cbd5e0;
+            --mode-toggle-bg: #cbd5e0;
+            --mode-toggle-handle: #2d3748;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for mode toggle */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .contact-container {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color); /* Initial border */
+            border-radius: 1.5rem; /* More rounded */
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Deeper shadow */
+            max-width: 900px; /* Max width for content */
+            width: 95%; /* Responsive width */
+            text-align: center;
+            transition: all 0.3s ease; /* Smooth transition for hover and mode change */
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: relative; /* For mode toggle positioning */
+        }
+
+        .contact-container:hover {
+            border-color: #81e6d9; /* Teal glow on hover */
+            box-shadow: 0 10px 30px rgba(129, 230, 217, 0.8); /* Stronger glow shadow */
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 8px rgba(160, 174, 192, 0.5); /* Subtle glow */
+        }
+
+        .contact-section {
+            background-color: var(--bg-start); /* Darker background for sections */
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .contact-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .contact-item a {
+            color: var(--icon-hover-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 1rem;
+        }
+
+        .social-icon-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--button-bg); /* Use a button-like background */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%; /* Circular icons */
+            font-size: 2rem;
+            color: var(--icon-color);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+            text-decoration: none; /* Remove underline */
+        }
+
+        .social-icon-link:hover {
+            background-color: var(--icon-hover-color);
+            color: white; /* White icon on hover for contrast */
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .copy-button {
+            background-color: var(--copy-btn-bg);
+            color: var(--button-text);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-left: 1rem;
+        }
+
+        .copy-button:hover {
+            background-color: var(--copy-btn-hover-bg);
+            transform: translateY(-1px);
+        }
+
+        .copy-button:active {
+            transform: translateY(0);
+        }
+
+        /* Mode Toggle styles */
+        .mode-toggle-container {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 10;
+        }
+
+        .mode-toggle {
+            width: 60px;
+            height: 30px;
+            background-color: var(--mode-toggle-bg);
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .mode-toggle::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: var(--mode-toggle-handle);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        html.bright-mode .mode-toggle::before {
+            transform: translateX(30px);
+        }
+
+        /* Message Box for copy to clipboard confirmation */
+        .message-box {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50; /* Green for success */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .message-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+            .contact-section {
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+            .contact-item {
+                flex-direction: column; /* Stack on small screens */
+                text-align: center;
+                gap: 0.5rem;
+            }
+            .social-icons-grid {
+                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+                gap: 1rem;
+            }
+            .social-icon-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+            .copy-button {
+                margin-left: 0; /* Remove margin when stacked */
+                margin-top: 0.5rem; /* Add top margin when stacked */
+            }
+            .mode-toggle-container {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .contact-item {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <!-- Mode Toggle -->
+        <div class="mode-toggle-container">
+            <div id="modeToggle" class="mode-toggle"></div>
+        </div>
+
+        <h1>Get in Touch!</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Email Service Section -->
+            <div class="contact-section">
+                <h2 class="text-2xl font-semibold text-white">Email Us</h2>
+                <div class="contact-item">
+                    <i class="fas fa-envelope text-2xl" style="color: var(--icon-hover-color);"></i>
+                    <span>
+                        <a href="mailto:aashiqrahaman0@gmail.com" class="hover:underline">aashiqrahaman0@gmail.com</a>
+                        <button class="copy-button" data-copy="aashiqrahaman0@gmail.com">Copy</button>
+                    </span>
+                </div>
+                <p class="text-sm text-gray-400">Feel free to send us an email for any inquiries.</p>
+            </div>
+
+            <!-- Mobile Service Section -->
+            <div class="contact-section">
+                <h2 class="text-2xl font-semibold text-white">Call Us</h2>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt text-2xl" style="color: var(--icon-hover-color);"></i>
+                    <span>
+                        <a href="tel:0" class="hover:underline">o</a>
+                        <button class="copy-button" data-copy="+1234567890">Copy</button>
+                    </span>
+                </div>
+                <p class="text-sm text-gray-400">Reach us directly via phone during business hours.</p>
+            </div>
+        </div>
+
+        <!-- Social Media Handles Section -->
+        <div class="contact-section">
+            <h2 class="text-2xl font-semibold text-white">Follow Us</h2>
+            <div class="social-icons-grid">
+                <a href="https://twitter.com/example" target="_blank" class="social-icon-link" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://facebook.com/example" target="_blank" class="social-icon-link" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com/example" target="_blank" class="social-icon-link" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com/company/example" target="_blank" class="social-icon-link" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/example" target="_blank" class="social-icon-link" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://youtube.com/example" target="_blank" class="social-icon-link" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <p class="text-sm text-gray-400">Connect with us on our social media platforms.</p>
+        </div>
+    </div>
+
+    <!-- Message box for copy confirmation -->
+    <div id="messageBox" class="message-box"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modeToggle = document.getElementById('modeToggle');
+            const htmlElement = document.documentElement;
+            const copyButtons = document.querySelectorAll('.copy-button');
+            const messageBox = document.getElementById('messageBox');
+
+            // Dark/Bright mode toggle logic
+            modeToggle.addEventListener('click', () => {
+                htmlElement.classList.toggle('bright-mode');
+                // Store preference in localStorage
+                if (htmlElement.classList.contains('bright-mode')) {
+                    localStorage.setItem('theme', 'bright');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+
+            // Apply saved theme on load
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'bright') {
+                htmlElement.classList.add('bright-mode');
+            } else {
+                // Default to dark mode if no preference or 'dark'
+                htmlElement.classList.remove('bright-mode');
+            }
+
+            // Function to copy text to clipboard
+            function copyTextToClipboard(text) {
+                // Using document.execCommand('copy') as navigator.clipboard.writeText()
+                // might not work directly in all iframe environments due to security policies.
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed'; // Prevent scrolling to bottom of page
+                textarea.style.opacity = 0;
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    const successful = document.execCommand('copy');
+                    const msg = successful ? 'Copied!' : 'Failed to copy!';
+                    showMessage(msg);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    showMessage('Copy failed!');
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            }
+
+            // Function to show message box
+            function showMessage(message) {
+                messageBox.textContent = message;
+                messageBox.classList.add('show');
+                setTimeout(() => {
+                    messageBox.classList.remove('show');
+                }, 2000); // Message disappears after 2 seconds
+            }
+
+            // Add event listeners to copy buttons
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const textToCopy = button.dataset.copy;
+                    if (textToCopy) {
+                        copyTextToClipboard(textToCopy);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Aashiq Rahaman | Portfolio</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">AashiqR</div>
+        <ul>
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#profile" class="nav-link">Profile</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-toggle">&#9776;</div>
+    </nav>
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section visible">
+            <div class="hero">
+                <h1>Hi, I'm <span class="highlight">Aashiq Rahaman</span></h1>
+                <p class="subtitle">BTech CSE Student | Web Developer</p>
+                <a href="#projects" class="cta-btn">See My Projects</a>
+            </div>
+            <div class="hero-image"></div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="section">
+            <h2>Profile</h2>
+            <div class="profile-content">
+                <img src="..\asseets\Logo.png" alt="Profile" class="profile-pic" />
+                <div>
+                    <h3>About Me</h3>
+                    <p>
+                        Passionate BTech CSE student and self-motivated web developer. I love building web solutions, exploring new technologies, and collaborating on dynamic projects.
+                    </p>
+                    <h4>Skills</h4>
+                    <ul class="skills-list">
+                        <li>JavaScript (ES6+)</li>
+                        <li>HTML5 & CSS3 (Flexbox, Grid)</li>
+                        <li>React, Node.js, Express</li>
+                        <li>Git, GitHub</li>
+                        <li>Python (basic)</li>
+                        <li>SQL, MongoDB</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="card animate">
+                    <h4>Personal Portfolio Website</h4>
+                    <p>A responsive, interactive personal portfolio built with HTML, CSS, and JS. Features smooth scrolling and animated navigation.</p>
+                    <span>HTML, CSS, JS</span>
+                </div>
+                <div class="card animate">
+                    <h4>Student Management App</h4>
+                    <p>Web-based CRUD application to manage student records. Includes authentication and search features.</p>
+                    <span>React, Node.js, MongoDB</span>
+                </div>
+                <div class="card animate">
+                    <h4>Weather Dashboard</h4>
+                    <p>Web tool that fetches live weather data and displays city-wise forecasts with simple data visualization.</p>
+                    <span>JavaScript, API integration</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            <form id="contactForm">
+                <input type="text" placeholder="Your Name" required/>
+                <input type="email" placeholder="Your Email" required/>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+                <div id="formStatus"></div>
+            </form>
+            <div class="info-email">
+                <b>Email:</b> <a href="mailto:aashiqrahaman135@gmail.com">aashiqrahaman135@gmail.com</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Aashiq Rahaman | Web Developer</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

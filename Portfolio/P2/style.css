@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #333;
+}
+header {
+    background: #254e70;
+    color: white;
+    padding: 30px 0;
+}
+header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header h1 {
+    font-size: 2.5rem;
+}
+header h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+nav {
+    margin-top: 10px;
+}
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+}
+section h3 {
+    color: #254e70;
+    border-bottom: 2px solid #e1e4e8;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+#skills ul {
+    list-style: square inside;
+    margin-left: 20px;
+}
+.project {
+    background: #fff;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 4px rgba(70,130,180,0.05);
+}
+#contact form {
+    display: flex;
+    flex-direction: column;
+}
+#contact input, #contact textarea {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 1rem;
+}
+#contact button {
+    width: 120px;
+    padding: 10px;
+    background: #254e70;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#contact button:hover {
+    background: #406882;
+}
+footer {
+    text-align: center;
+    background: #eee;
+    padding: 15px 0;
+    color: #444;
+    margin-top: 40px;
+}
+@media(max-width: 600px) {
+    .container { width: 98%; }
+    header h1 { font-size: 2rem; }
+}
