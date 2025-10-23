@@ -1,38 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <style>
-        video {height: 300px;
-             width: 500px;
-             border-radius: 10px;
-             box-shadow: 10px 10px 10px rgba(238, 138, 138, 0.5);
-             margin: 20px;
-        }
-        video:hover{
-                       box-shadow: 10px 10px 10px rgba(136, 243, 114, 0.5);
-
-        }
-
-    </style>
-    <!-- <video src="https://youtu.be/tZhSWVMEwNY?si=tsicCkoNdqU4mxKm">hi</video>
-    <video src="vid.mp4"></video> -->
-
-    <video width="320" height="240" controls>
-        <source src="vid.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-      </video>
-      <video tabindex="-1" class="video-stream html5-main-video" src="blob:https://www.youtube.com/fd39ef40-0a4e-4d95-bca3-e409ccf69764" controls></video>
-
-      <video width="320" height="240" controls>
-        <source src="https://www.youtube.com/watch?v=b4qgyx8r948" type="video/mp4">
-      Your browser does not support the video tag.
-      </video>
-
-
-</body>
+<html>
+  <body>
+    <script>
+      
+    </script>
+    <h2>What Can JavaScript Do?</h2>
+    <p>JavaScript can change HTML attribute values.</p>
+    <p>In this case JavaScript changes the value of the src (source) attribute of an image.</p>
+    <!-- <button onclick="document.getElementById('myImage').src='https://www.w3schools.com/js/pic_bulbon.gif'">Turn on the light</button> -->
+    <button id="btn1">Turn on the light</button>
+    <img id="myImage" src="https://www.w3schools.com/js/pic_bulboff.gif" style="width:100px"/>
+    <button id="btn2">Turn off the light</button>
+    <!-- <button onclick="document.getElementById('myImage').src='https://www.w3schools.com/js/pic_bulboff.gif'">Turn off the light</button> -->
+  </body>
 </html>
