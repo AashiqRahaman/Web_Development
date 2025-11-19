@@ -2,69 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>My Essential Bookmarks</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="style.css" />
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  
 </head>
 <body>
   <canvas id="particle-bg"></canvas>
+  
   <nav class="navbar">
-    <div class="logo">My Essential Bookmarks</div>
-    <div class="links">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-      <a href="#">Bookmarks</a>
-      <a href="#">Search</a>
+    <div class="nav-container">
+      <div class="logo">My Bookmarks</div>
+      <div class="nav-controls">
+        <button class="dark-toggle" id="darkToggle">🌙</button>
+      </div>
     </div>
-    <button class="dark-toggle" id="darkToggle">🌙 Dark mode</button>
   </nav>
+
   <main>
-    <div class="add-type-wrap">
-      <button class="add-type-btn" id="addTypeBtn">+ Add Category</button>
+    <div class="controls-area">
+      <button class="add-type-btn" id="addTypeBtn">
+        <span class="icon">+</span> New Category
+      </button>
     </div>
-    <section class="bookmarks" id="bookmarkTypesContainer"></section>
+    
+    <section class="bookmarks-container" id="bookmarkTypesContainer"></section>
   </main>
-  <div class="form-popup" id="popupForm" style="display:none;">
-    <div class="form-content" id="formContent"></div>
+
+  <div class="form-overlay" id="popupForm">
+    <div class="form-card" id="formContent"></div>
   </div>
 
+  <div class="footer-custom">
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-md-3 item">
+            <h3>Services</h3>
+            <ul>
+              <li><a href="#">Web design</a></li>
+              <li><a href="#">Development</a></li>
+              <li><a href="#">Hosting</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3 item">
+            <h3>About</h3>
+            <ul>
+              <li><a href="#">Company</a></li>
+              <li><a href="#">Team</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 item text">
+            <h3>ArTech Pvt. Lim.</h3>
+            <p>Personal fun project builder using basic html css and some pre build components for fast development.</p>
+          </div>
+          <div class="col item social">
+            <a href="https://www.facebook.com/aashiq.rahaman.98"><i class="icon ion-social-facebook"></i></a>
+            <a href="https://x.com/Aashiq95394379"><i class="icon ion-social-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/aashiq-rahaman/"><i class="icon ion-social-linkedin"></i></a>
+            <a href="https://www.instagram.com/aashiqrahaman01?igsh=YzljYTk1ODg3Zg=="><i class="icon ion-social-instagram"></i></a>
+            <a href="https://github.com/AashiqRahaman"><i class="icon ion-social-github"></i></a>
+          </div>
+        </div>
+        <p class="copyright">ArTech® © 2025</p>
+      </div>
+    </footer>
+  </div>
 
-    <div class="footer-dark">
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>Services</h3>
-                        <ul>
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3 >About</h3>
-                        <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 item text">
-                        <h3>ArTech Pvt. Lim.</h3>
-                        <p>Personal fun project builder using basic html css and some pre build components from internet for fast development.</p>
-                    </div>
-                    <div class="col item social"><a href="https://www.facebook.com/aashiq.rahaman.98"><i class="icon ion-social-facebook"></i></a><a href="https://x.com/Aashiq95394379"><i class="icon ion-social-twitter"></i></a><a href="https://www.linkedin.com/in/aashiq-rahaman/"><i class="icon ion-social-linkedin"></i></a><a href="https://www.instagram.com/aashiqrahaman01?igsh=YzljYTk1ODg3Zg=="><i class="icon ion-social-instagram"></i></a><a href="https://github.com/AashiqRahaman"><i class="icon ion-social-github"></i></a></div>
-                </div>
-                <p class="copyright">ArTech® © 2025</p>
-            </div>
-        </footer>
-    </div> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
