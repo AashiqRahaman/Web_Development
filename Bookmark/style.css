@@ -16,6 +16,10 @@
   --radius-lg: 16px;
   --radius-sm: 8px;
 }
+.icon{
+  height: 35px;
+  border-radius: 10px;
+}
 
 body.dark {
   /* Dark Theme Variables */
@@ -97,7 +101,7 @@ html, body {
 
 /* --- Main Layout --- */
 main {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }

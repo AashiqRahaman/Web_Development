@@ -1,5 +1,5 @@
 // Local Storage Helper
-const STORAGE_KEY = "my_bookmarks_data_v2"; // Bumped version to clear old data format issues
+const STORAGE_KEY = "my_bookmarks_data_v"; // Bumped version to clear old data format issues
 const THEME_KEY = "my_bookmarks_theme";
 
 function saveToStorage() {
